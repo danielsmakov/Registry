@@ -1,0 +1,31 @@
+﻿@model List<Registry.WEB.Models.OrganizationViewModel>
+@using Registry.WEB.Models
+@using Kendo.Mvc.UI
+@{
+    ViewBag.Title = "Organizations";
+}
+
+
+
+
+@* Code below is for testing the data transition from DB to the Presentation layer*@
+
+<div class="container">
+    <table class="text-center">
+        <tr>
+            <th class="text-center" style="width: 200px">Id</th>
+            <th class="text-center" style="width: 200px">Name</th>
+            <th class="text-center" style="width: 200px">BIN</th>
+            <th class="text-center" style="width: 200px">Phone Number</th>
+        </tr>
+        @foreach(OrganizationViewModel item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.BIN</td>
+                <td>@item.PhoneNumber</td>
+            </tr>
+        }
+    </table>
+</div>
