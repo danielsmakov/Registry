@@ -67,19 +67,21 @@ namespace Registry.BLL.Services
             {
                 throw new ValidationException("Passed organization equals null", "");
             }
+
             Organization org = new Organization
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = orgDTO.Id,
                 Name = orgDTO.Name,
                 BIN = orgDTO.BIN,
-                PhoneNumber = orgDTO.PhoneNumber
+                PhoneNumber = orgDTO.PhoneNumber,
+                Status = orgDTO.Status,
+                BeginDate = orgDTO.BeginDate,
             };
-            Database.Organizations.Create(org);
+            Database.Organizations.Update(org);
         }
         public void Disable(string id)
         {
-            if (Database.Organizations.Get(id) == null)
-                throw new ValidationException($"Organization with Id {id} is not found", "");
+            
             Database.Organizations.Disable(id);
         }
         public void Dispose()

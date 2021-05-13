@@ -5,12 +5,40 @@
     ViewBag.Title = "Organizations";
 }
 
+<div class="container" style="margin-top: 100px">
+    @(Html.Kendo().Grid<Registry.WEB.Models.OrganizationViewModel>()
+        .Name("OrganizationGrid")
+        .Columns(columns =>
+        {
+            columns.Bound(o => o.Name).Width(200);
+            columns.Bound(o => o.BIN).Width(200);
+            columns.Bound(o => o.PhoneNumber).Width(200);
+            columns.Command(command => { command.Edit(); command.Destroy(); });
+        })
+        .ToolBar(toolBar => toolBar.Create())
+        .Editable(editable => editable.Mode(GridEditMode.PopUp))
+        .Pageable()
+        .Scrollable()
+        .Sortable()
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(20)
+            .Model(model => model.Id(o => o.Id))
+            .Read(read => read.Action("Read_Organizations", "Home"))
+            .Create(create => create.Action("Create_Organization", "Home"))
+            .Update(update => update.Action("Update_Organization", "Home"))
+            .Destroy(destroy => destroy.Action("Disable_Organization", "Home"))
+        )
+    )
+</div>
+
+
 
 
 
 @* Code below is for testing the data transition from DB to the Presentation layer*@
 
-<div class="container">
+@*<div class="container">
     <table class="text-center">
         <tr>
             <th class="text-center" style="width: 200px">Id</th>
@@ -28,4 +56,4 @@
             </tr>
         }
     </table>
-</div>
+</div>*@

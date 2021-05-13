@@ -11,5 +11,7 @@ namespace Registry.WEB.Models
         public string Name { get; set; }
         public string BIN { get; set; }
         public string PhoneNumber { get; set; }
+        public string BeginDate { get; set; }
+        public string EndDate { get; set; }
     }
 }

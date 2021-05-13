@@ -14,7 +14,7 @@ namespace Registry.DAL.Repositories
     public class OrganizationRepository : IRepository<Organization>
     {
         private SqlConnection _con;
-        public OrganizationRepository()
+        /*public OrganizationRepository()
         {
             List<Organization> orgs = GetAll();
             if (!orgs.Any())
@@ -22,7 +22,17 @@ namespace Registry.DAL.Repositories
                 Organization org = new Organization { Id = Guid.NewGuid().ToString(), Name = "Google", BIN = "749583740162", PhoneNumber = "+18239433437", Status = 1, BeginDate = DateTime.Now.ToString() };
                 Create(org);
             }
-        }
+        }*/
+
+
+        // Constructor below is to DELETE ALL records in the table
+        /*public OrganizationRepository()
+        {
+            Connection();
+            _con.Open();
+            _con.Execute("Delete From Organizations");
+            _con.Close();
+        }*/
         private void Connection()
         {
             string connectString = ConfigurationManager.ConnectionStrings["RegistryDBConnection"].ConnectionString;
@@ -91,6 +101,9 @@ namespace Registry.DAL.Repositories
                 param.Add("@Name", org.Name);
                 param.Add("@BIN", org.BIN);
                 param.Add("@PhoneNumber", org.PhoneNumber);
+                param.Add("@Status", 1);
+                param.Add("@BeginDate", org.BeginDate);
+                param.Add("@EndDate", org.EndDate);
                 Connection();
                 _con.Open();
                 _con.Execute("Update Organizations Set Name = @Name, BIN = @BIN, PhoneNumber = @PhoneNumber Where Id = @Id", param);
