@@ -14,6 +14,7 @@ namespace Registry.WEB.Util
         public override void Load()
         {
             Bind<IService<OrganizationDTO>>().To<OrganizationService>();
+            Bind<IService<ServiceDTO>>().To<ServService>();
         }
     }
 }

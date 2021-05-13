@@ -22,7 +22,7 @@ namespace Registry.WEB.Controllers
         }
         public ActionResult Index()
         {
-            return View();
+            return View("Organizations");
         }
         public ActionResult Read_Organizations([DataSourceRequest]DataSourceRequest request)
         {

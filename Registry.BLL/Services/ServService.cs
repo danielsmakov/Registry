@@ -11,7 +11,7 @@ using AutoMapper;
 
 namespace Registry.BLL.Services
 {
-    class ServService : IService<ServiceDTO>
+    public class ServService : IService<ServiceDTO>
     {
         IUnitOfWork Database { get; set; }
         public ServService(IUnitOfWork uow)
@@ -73,7 +73,7 @@ namespace Registry.BLL.Services
                 Name = servDTO.Name,
                 Code = servDTO.Code,
                 Price = servDTO.Price,
-                Status = servDTO.Status,
+                Status = 1,
                 BeginDate = servDTO.BeginDate,
             };
             Database.Services.Update(serv);
