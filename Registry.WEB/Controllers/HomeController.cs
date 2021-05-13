@@ -9,13 +9,14 @@ using AutoMapper;
 using Registry.WEB.Models;
 using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
+using Registry.BLL.Services;
 
 namespace Registry.WEB.Controllers
 {
     public class HomeController : Controller
     {
-        IOrganizationService orgService;
-        public HomeController(IOrganizationService serv)
+        IService<OrganizationDTO> orgService;
+        public HomeController(IService<OrganizationDTO> serv)
         {
             orgService = serv;
         }
@@ -25,7 +26,7 @@ namespace Registry.WEB.Controllers
         }
         public ActionResult Read_Organizations([DataSourceRequest]DataSourceRequest request)
         {
-            List<OrganizationDTO> orgDTOs = orgService.GetOrganizations();
+            List<OrganizationDTO> orgDTOs = orgService.GetAll();
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<OrganizationDTO, OrganizationViewModel>()).CreateMapper();
             List<OrganizationViewModel> orgViewModels = mapper.Map<List<OrganizationDTO>, List<OrganizationViewModel>>(orgDTOs);
             return Json(orgViewModels.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
@@ -40,7 +41,7 @@ namespace Registry.WEB.Controllers
                     BIN = orgViewModel.BIN,
                     PhoneNumber = orgViewModel.PhoneNumber
                 };
-                orgService.RegisterOrganization(orgDTO);
+                orgService.Create(orgDTO);
             }
             return Json(new[] { orgViewModel }.ToDataSourceResult(request, ModelState));
         }
@@ -57,7 +58,7 @@ namespace Registry.WEB.Controllers
                     BeginDate = orgViewModel.BeginDate,
                     EndDate = orgViewModel.EndDate
                 };
-                orgService.UpdateOrganization(orgDTO);
+                orgService.Update(orgDTO);
             }
             return Json(new[] { orgViewModel }.ToDataSourceResult(request, ModelState));
         }

@@ -101,12 +101,12 @@ namespace Registry.DAL.Repositories
                 param.Add("@Name", org.Name);
                 param.Add("@BIN", org.BIN);
                 param.Add("@PhoneNumber", org.PhoneNumber);
-                param.Add("@Status", 1);
+                /*param.Add("@Status", 1);*/
                 param.Add("@BeginDate", org.BeginDate);
-                param.Add("@EndDate", org.EndDate);
+                /*param.Add("@EndDate", org.EndDate);*/
                 Connection();
                 _con.Open();
-                _con.Execute("Update Organizations Set Name = @Name, BIN = @BIN, PhoneNumber = @PhoneNumber Where Id = @Id", param);
+                _con.Execute("Update Organizations Set Name = @Name, BIN = @BIN, PhoneNumber = @PhoneNumber, BeginDate = @BeginDate Where Id = @Id", param);
                 _con.Close();
             }
             catch (Exception ex)

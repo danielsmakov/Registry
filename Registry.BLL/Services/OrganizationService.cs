@@ -12,14 +12,14 @@ using System.Threading.Tasks;
 
 namespace Registry.BLL.Services
 {
-    public class OrganizationService : IOrganizationService
+    public class OrganizationService : IService<OrganizationDTO>
     {
         IUnitOfWork Database { get; set; }
         public OrganizationService(IUnitOfWork uow)
         {
             Database = uow;
         }
-        public OrganizationDTO GetOrganization(string id)
+        public OrganizationDTO Get(string id)
         {
             var org = Database.Organizations.Get(id);
             if (org == null)
@@ -38,13 +38,13 @@ namespace Registry.BLL.Services
             };
             return orgDTO;
         }
-        public List<OrganizationDTO> GetOrganizations()
+        public List<OrganizationDTO> GetAll()
         {
             List<Organization> orgs = Database.Organizations.GetAll();
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Organization, OrganizationDTO>()).CreateMapper();
             return mapper.Map<List<Organization>, List<OrganizationDTO>>(orgs);
         }
-        public void RegisterOrganization(OrganizationDTO orgDTO)
+        public void Create(OrganizationDTO orgDTO)
         {
             if (orgDTO == null)
             {
@@ -61,7 +61,7 @@ namespace Registry.BLL.Services
             };
             Database.Organizations.Create(org);
         }
-        public void UpdateOrganization(OrganizationDTO orgDTO)
+        public void Update(OrganizationDTO orgDTO)
         {
             if (orgDTO == null)
             {
@@ -81,7 +81,6 @@ namespace Registry.BLL.Services
         }
         public void Disable(string id)
         {
-            
             Database.Organizations.Disable(id);
         }
         public void Dispose()

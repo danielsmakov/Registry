@@ -10,5 +10,6 @@ namespace Registry.DAL.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         IRepository<Organization> Organizations { get; }
+        IRepository<Service> Services { get; }
     }
 }

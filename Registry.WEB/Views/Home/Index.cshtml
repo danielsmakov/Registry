@@ -13,6 +13,7 @@
             columns.Bound(o => o.Name).Width(200);
             columns.Bound(o => o.BIN).Width(200);
             columns.Bound(o => o.PhoneNumber).Width(200);
+            columns.Bound(o => o.BeginDate).Width(200);
             columns.Command(command => { command.Edit(); command.Destroy(); });
         })
         .ToolBar(toolBar => toolBar.Create())

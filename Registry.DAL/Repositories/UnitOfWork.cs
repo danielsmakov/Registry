@@ -16,6 +16,7 @@ namespace Registry.DAL.Repositories
         private static string connectionString = ConfigurationManager.ConnectionStrings["RegistryDBConnection"].ConnectionString;
         private IDbConnection db = new SqlConnection(connectionString);
         private OrganizationRepository orgRepository;
+        private ServiceRepository servRepository;
         public IRepository<Organization> Organizations
         {
             get
@@ -23,6 +24,15 @@ namespace Registry.DAL.Repositories
                 if (orgRepository == null)
                     orgRepository = new OrganizationRepository();
                 return orgRepository;
+            }
+        }
+        public IRepository<Service> Services
+        {
+            get
+            {
+                if (servRepository == null)
+                    servRepository = new ServiceRepository();
+                return servRepository;
             }
         }
         private bool disposed = false;

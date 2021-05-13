@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Ninject.Modules;
+using Registry.BLL.DTO;
 using Registry.BLL.Interfaces;
 using Registry.BLL.Services;
 
@@ -12,7 +13,7 @@ namespace Registry.WEB.Util
     {
         public override void Load()
         {
-            Bind<IOrganizationService>().To<OrganizationService>();
+            Bind<IService<OrganizationDTO>>().To<OrganizationService>();
         }
     }
 }
