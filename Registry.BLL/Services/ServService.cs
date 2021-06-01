@@ -25,16 +25,8 @@ namespace Registry.BLL.Services
             {
                 throw new Exception($"Service with Id {id} is not found");
             }
-            ServiceDTO servDTO = new ServiceDTO
-            {
-                Id = serv.Id,
-                Name = serv.Name,
-                Code = serv.Code,
-                Price = serv.Price,
-                Status = serv.Status,
-                BeginDate = serv.BeginDate,
-                EndDate = serv.EndDate
-            };
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Service, ServiceDTO>()).CreateMapper();
+            ServiceDTO servDTO = mapper.Map<Service, ServiceDTO>(serv);
             return servDTO;
         }
         public List<ServiceDTO> GetAll()
@@ -49,15 +41,10 @@ namespace Registry.BLL.Services
             {
                 throw new Exception("Passed service equals null");
             }
-            Service serv = new Service
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = servDTO.Name,
-                Code = servDTO.Code,
-                Price = servDTO.Price,
-                Status = 1,
-                BeginDate = servDTO.BeginDate
-            };
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ServiceDTO, Service>()).CreateMapper();
+            Service serv = mapper.Map<ServiceDTO, Service>(servDTO);
+            serv.Id = Guid.NewGuid().ToString();
+            serv.Status = 1;
             Database.Services.Create(serv);
         }
         public void Update(ServiceDTO servDTO)
@@ -66,16 +53,8 @@ namespace Registry.BLL.Services
             {
                 throw new Exception("Passed organization equals null");
             }
-
-            Service serv = new Service
-            {
-                Id = servDTO.Id,
-                Name = servDTO.Name,
-                Code = servDTO.Code,
-                Price = servDTO.Price,
-                Status = 1,
-                BeginDate = servDTO.BeginDate,
-            };
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ServiceDTO, Service>()).CreateMapper();
+            Service serv = mapper.Map<ServiceDTO, Service>(servDTO);
             Database.Services.Update(serv);
         }
         public void Disable(string id)
