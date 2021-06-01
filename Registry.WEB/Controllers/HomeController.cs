@@ -35,12 +35,8 @@ namespace Registry.WEB.Controllers
         {
             if (orgViewModel != null && ModelState.IsValid)
             {
-                OrganizationDTO orgDTO = new OrganizationDTO
-                {
-                    Name = orgViewModel.Name,
-                    BIN = orgViewModel.BIN,
-                    PhoneNumber = orgViewModel.PhoneNumber
-                };
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<OrganizationViewModel, OrganizationDTO>()).CreateMapper();
+                OrganizationDTO orgDTO = mapper.Map<OrganizationViewModel, OrganizationDTO>(orgViewModel);
                 orgService.Create(orgDTO);
             }
             return Json(new[] { orgViewModel }.ToDataSourceResult(request, ModelState));
@@ -49,15 +45,8 @@ namespace Registry.WEB.Controllers
         {
             if (orgViewModel != null && ModelState.IsValid)
             {
-                OrganizationDTO orgDTO = new OrganizationDTO
-                {
-                    Id = orgViewModel.Id,
-                    Name = orgViewModel.Name,
-                    BIN = orgViewModel.BIN,
-                    PhoneNumber = orgViewModel.PhoneNumber,
-                    BeginDate = orgViewModel.BeginDate,
-                    EndDate = orgViewModel.EndDate
-                };
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<OrganizationViewModel, OrganizationDTO>()).CreateMapper();
+                OrganizationDTO orgDTO = mapper.Map<OrganizationViewModel, OrganizationDTO>(orgViewModel);
                 orgService.Update(orgDTO);
             }
             return Json(new[] { orgViewModel }.ToDataSourceResult(request, ModelState));
