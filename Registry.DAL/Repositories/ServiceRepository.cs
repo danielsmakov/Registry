@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Registry.DAL.Repositories
 {
-    class ServiceRepository : IRepository<Service>
+    public class ServiceRepository : IRepository<Service>
     {
         private SqlConnection _con;
         private void Connection()
@@ -19,6 +19,13 @@ namespace Registry.DAL.Repositories
             string connectString = ConfigurationManager.ConnectionStrings["RegistryDBConnection"].ConnectionString;
             _con = new SqlConnection(connectString);
         }
+        /*public ServiceRepository()
+        {
+            Connection();
+            _con.Open();
+            _con.Execute("Delete From Services");
+            _con.Close();
+        }*/
         public Service Get(string id)
         {
             try

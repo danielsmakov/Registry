@@ -21,6 +21,7 @@ namespace Registry.WEB
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            
 
             NinjectModule serviceModule = new ServiceModule();
             NinjectModule organizationModule = new OrganizationModule();
