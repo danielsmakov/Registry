@@ -36,13 +36,8 @@ namespace Registry.WEB.Controllers
         {
             if (servViewModel != null && ModelState.IsValid)
             {
-                ServiceDTO servDTO = new ServiceDTO
-                {
-                    Name = servViewModel.Name,
-                    Code = servViewModel.Code,
-                    Price = servViewModel.Price,
-                    BeginDate = servViewModel.BeginDate
-                };
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ServiceViewModel, ServiceDTO>()).CreateMapper();
+                ServiceDTO servDTO = mapper.Map<ServiceViewModel, ServiceDTO>(servViewModel);
                 service.Create(servDTO);
             }
             return Json(new[] { servViewModel }.ToDataSourceResult(request, ModelState));
@@ -51,15 +46,8 @@ namespace Registry.WEB.Controllers
         {
             if (servViewModel != null && ModelState.IsValid)
             {
-                ServiceDTO servDTO = new ServiceDTO
-                {
-                    Id = servViewModel.Id,
-                    Name = servViewModel.Name,
-                    Code = servViewModel.Code,
-                    Price = servViewModel.Price,
-                    BeginDate = servViewModel.BeginDate,
-                    EndDate = servViewModel.EndDate
-                };
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ServiceViewModel, ServiceDTO>()).CreateMapper();
+                ServiceDTO servDTO = mapper.Map<ServiceViewModel, ServiceDTO>(servViewModel);
                 service.Update(servDTO);
             }
             return Json(new[] { servViewModel }.ToDataSourceResult(request, ModelState));
