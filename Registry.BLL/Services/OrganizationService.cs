@@ -22,10 +22,6 @@ namespace Registry.BLL.Services
         public OrganizationDTO Get(string id)
         {
             var org = Database.Organizations.Get(id);
-            if (org == null)
-            {
-                throw new ValidationException("Organization is not found", "");
-            }
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Organization, OrganizationDTO>()).CreateMapper();
             OrganizationDTO orgDTO = mapper.Map<Organization, OrganizationDTO>(org);
             return orgDTO;
@@ -38,10 +34,6 @@ namespace Registry.BLL.Services
         }
         public void Create(OrganizationDTO orgDTO)
         {
-            if (orgDTO == null)
-            {
-                throw new ValidationException("Passed organization equals null", "");
-            }
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<OrganizationDTO, Organization>()).CreateMapper();
             Organization org = mapper.Map<OrganizationDTO, Organization>(orgDTO);
             org.Id = Guid.NewGuid().ToString();
@@ -51,10 +43,6 @@ namespace Registry.BLL.Services
         }
         public void Update(OrganizationDTO orgDTO)
         {
-            if (orgDTO == null)
-            {
-                throw new ValidationException("Passed organization equals null", "");
-            }
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<OrganizationDTO, Organization>()).CreateMapper();
             Organization org = mapper.Map<OrganizationDTO, Organization>(orgDTO);
             Database.Organizations.Update(org);

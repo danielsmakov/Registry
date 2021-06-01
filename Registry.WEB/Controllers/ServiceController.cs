@@ -20,7 +20,6 @@ namespace Registry.WEB.Controllers
         {
             service = serv;
         }
-        // GET: Service
         public ActionResult Index()
         {
             return View("Services");

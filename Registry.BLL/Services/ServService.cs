@@ -21,10 +21,6 @@ namespace Registry.BLL.Services
         public ServiceDTO Get(string id)
         {
             var serv = Database.Services.Get(id);
-            if (serv == null)
-            {
-                throw new Exception($"Service with Id {id} is not found");
-            }
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Service, ServiceDTO>()).CreateMapper();
             ServiceDTO servDTO = mapper.Map<Service, ServiceDTO>(serv);
             return servDTO;
@@ -37,10 +33,6 @@ namespace Registry.BLL.Services
         }
         public void Create(ServiceDTO servDTO)
         {
-            if (servDTO == null)
-            {
-                throw new Exception("Passed service equals null");
-            }
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ServiceDTO, Service>()).CreateMapper();
             Service serv = mapper.Map<ServiceDTO, Service>(servDTO);
             serv.Id = Guid.NewGuid().ToString();
@@ -49,10 +41,6 @@ namespace Registry.BLL.Services
         }
         public void Update(ServiceDTO servDTO)
         {
-            if (servDTO == null)
-            {
-                throw new Exception("Passed organization equals null");
-            }
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ServiceDTO, Service>()).CreateMapper();
             Service serv = mapper.Map<ServiceDTO, Service>(servDTO);
             Database.Services.Update(serv);
