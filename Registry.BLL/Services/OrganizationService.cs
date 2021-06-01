@@ -26,16 +26,8 @@ namespace Registry.BLL.Services
             {
                 throw new ValidationException("Organization is not found", "");
             }
-            OrganizationDTO orgDTO = new OrganizationDTO
-            {
-                Id = org.Id,
-                Name = org.Name,
-                BIN = org.BIN,
-                PhoneNumber = org.PhoneNumber,
-                Status = org.Status,
-                BeginDate = org.BeginDate,
-                EndDate = org.EndDate
-            };
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Organization, OrganizationDTO>()).CreateMapper();
+            OrganizationDTO orgDTO = mapper.Map<Organization, OrganizationDTO>(org);
             return orgDTO;
         }
         public List<OrganizationDTO> GetAll()
@@ -50,15 +42,11 @@ namespace Registry.BLL.Services
             {
                 throw new ValidationException("Passed organization equals null", "");
             }
-            Organization org = new Organization
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = orgDTO.Name,
-                BIN = orgDTO.BIN,
-                PhoneNumber = orgDTO.PhoneNumber,
-                Status = 1,
-                BeginDate = DateTime.Now.ToString()
-            };
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<OrganizationDTO, Organization>()).CreateMapper();
+            Organization org = mapper.Map<OrganizationDTO, Organization>(orgDTO);
+            org.Id = Guid.NewGuid().ToString();
+            org.Status = 1;
+            org.BeginDate = DateTime.Now.ToString();
             Database.Organizations.Create(org);
         }
         public void Update(OrganizationDTO orgDTO)
@@ -67,16 +55,8 @@ namespace Registry.BLL.Services
             {
                 throw new ValidationException("Passed organization equals null", "");
             }
-
-            Organization org = new Organization
-            {
-                Id = orgDTO.Id,
-                Name = orgDTO.Name,
-                BIN = orgDTO.BIN,
-                PhoneNumber = orgDTO.PhoneNumber,
-                Status = orgDTO.Status,
-                BeginDate = orgDTO.BeginDate,
-            };
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<OrganizationDTO, Organization>()).CreateMapper();
+            Organization org = mapper.Map<OrganizationDTO, Organization>(orgDTO);
             Database.Organizations.Update(org);
         }
         public void Disable(string id)
