@@ -7,7 +7,71 @@
 
 <h2>Organizations</h2>
 
-<div class="container" style="margin-top: 100px">
+<div id="grid"></div>
+
+<script>
+        $(document).ready(function () {
+            var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+                dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: "/HomeController/Read_Organizations",
+                            dataType: "jsonp"
+                        },
+                        update: {
+                            url: crudServiceBaseUrl + "/HomeController/Update_Organization",
+                            dataType: "jsonp"
+                        },
+                        destroy: {
+                            url: crudServiceBaseUrl + "/HomeController/Disable_Organization",
+                            dataType: "jsonp"
+                        },
+                        create: {
+                            url: crudServiceBaseUrl + "/HomeController/Create_Organization",
+                            dataType: "jsonp"
+                        },
+                        parameterMap: function (options, operation) {
+                            if (operation !== "read" && options.models) {
+                                return { models: kendo.stringify(options.models) };
+                            }
+                        }
+                    },
+                    batch: true,
+                    pageSize: 20,
+                    schema: {
+                        model: {
+                            id: "Id",
+                            fields: {
+                                Id: { editable: false },
+                                Name: { validation: { required: true } },
+                                BIN: { type: "number", validation: { required: true, max: 12 } },
+                                PhoneNumber: { type: "string" },
+                                BeginDate: { type: "object", validation: { required: true } }
+                            }
+                        }
+                    }
+                });
+
+            $("#grid").kendoGrid({
+                dataSource: dataSource,
+                pageable: true,
+                height: 550,
+                toolbar: ["create"],
+                columns: [
+                    { field: "Name" },
+                    { field: "BIN", format: "{0:c}", width: "120px" },
+                    { field: "PhoneNumber", title: "Phone Number", width: "120px" },
+                    { field: "BeginDate", title: "Begin Date", width: "120px" },
+                    { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }],
+                editable: "popup"
+            });
+        });
+
+</script>
+
+
+
+@*<div class="container" style="margin-top: 100px">
     @(Html.Kendo().Grid<Registry.WEB.Models.OrganizationViewModel>()
         .Name("OrganizationsGrid")
         .Columns(columns =>
@@ -33,7 +97,7 @@
             .Destroy(destroy => destroy.Action("Disable_Organization", "Home"))
         )
     )
-</div>
+</div>*@
 
 
 

@@ -9,6 +9,7 @@ namespace Registry.WEB
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                        "~/Scripts/jquery-{version}.min.js",
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -27,6 +28,7 @@ namespace Registry.WEB
                       "~/Content/site.css"));
             bundles.Add(new ScriptBundle("~/Kendo/js").Include(
                 "~/Scripts/kendo/2021.2.511/kendo.all.min.js",
+                "~/Scripts/kendo/2021.2.511/jszip.min.js",
                 "~/Scripts/kendo/2021.2.511/kendo.aspnetmvc.min.js"));
             bundles.Add(new StyleBundle("~/Kendo/styles").Include(
                 "~/Content/kendo/2021.2.511/kendo.common.min.css",

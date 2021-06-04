@@ -20,6 +20,7 @@ namespace Registry.WEB.Controllers
         {
             orgService = serv;
         }
+        [Route("/")]
         public ActionResult Index()
         {
             return View("Organizations");
