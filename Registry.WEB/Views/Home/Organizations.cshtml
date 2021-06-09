@@ -7,7 +7,7 @@
 
 <h2>Organizations</h2>
 
-<div id="grid"></div>
+@*<div id="grid"></div>
 
 <script>
         $(document).ready(function () {
@@ -67,11 +67,11 @@
             });
         });
 
-</script>
+</script>*@
 
 
 
-@*<div class="container" style="margin-top: 100px">
+<div class="container" style="margin-top: 100px">
     @(Html.Kendo().Grid<Registry.WEB.Models.OrganizationViewModel>()
         .Name("OrganizationsGrid")
         .Columns(columns =>
@@ -97,7 +97,7 @@
             .Destroy(destroy => destroy.Action("Disable_Organization", "Home"))
         )
     )
-</div>*@
+</div>
 
 
 

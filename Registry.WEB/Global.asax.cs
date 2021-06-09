@@ -21,12 +21,12 @@ namespace Registry.WEB
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            
 
-            NinjectModule serviceModule = new ServiceModule();
+            AutofacConfig.ConfigureContainer();
+            /*NinjectModule serviceModule = new ServiceModule();
             NinjectModule organizationModule = new OrganizationModule();
             var kernel = new StandardKernel(serviceModule, organizationModule);
-            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
+            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));*/
         }
     }
 }
