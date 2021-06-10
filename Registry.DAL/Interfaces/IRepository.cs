@@ -9,10 +9,10 @@ namespace Registry.DAL.Interfaces
 {
     public interface IRepository<T> where T : class
     {
-        T Get(string id);
-        List<T> GetAll();
-        void Create(T org);
+        T Get(int id);
+        List<T> List();
+        void Insert(T org);
         void Update(T org);
-        void Disable(string id);
+        void Delete(int id);
     }
 }

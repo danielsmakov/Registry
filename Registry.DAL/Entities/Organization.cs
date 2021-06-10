@@ -10,6 +10,9 @@ namespace Registry.DAL.Entities
     {
         public string Id { get; set; }
         public string Name { get; set; }
+        /// <summary>
+        /// BIN is a 12-digit number
+        /// </summary>
         public string BIN { get; set; }
         public string PhoneNumber { get; set; }
         public int Status { get; set; }
